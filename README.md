@@ -46,7 +46,7 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * Spring Web
 * Lombok
 * MariaDB Driver
-* Spring Boot JPA
+* Spring Data JPA
 * Spring Boot DevTools
 * swagger
 
