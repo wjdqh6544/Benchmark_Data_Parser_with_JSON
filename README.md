@@ -1,0 +1,55 @@
+## 벤치마크 데이터 반환 프로그램
+
+* DB에 저장된 CPU 및 GPU 의 벤치마크 점수를 반환하는 프로그램입니다.
+* JAVA SpringBoot 를 통해 작성되었으며, 데이터는 JSON 형식으로 파싱되어 제공됩니다.
+* URL을 통해 CPU/GPU 의 제품명을 제공하면, 각 제품의 이름과 벤치마크 점수가 JSON 형태로 반환됩니다.
+* 벤치마크 점수 추가/수정은 지원하지 않으며, 오직 DB로부터 파일을 읽어오는 기능만 제공됩니다.
+* SpringBoot 를 통한 데이터 수정/추가 계획은 없습니다.
+* 개발 기간: 2024. 08. 01. ~ (필요 시 지속적으로 수정 및 보완 예정)
+---
+## [프로그램 작성 목적]
+* 블로그를 보다 편리하게 운영할 수 있도록 본 프로그램을 고안하였습니다.
+* 벤치마크 자료가 삽입되어야 하는 경우, 데이터를 중복하여 입력할 필요 없이, DB에 저장된 것을 사용합니다.
+* 벤치마크 데이터가 수정되어야 하는 경우에도, 모든 게시글을 찾아 수정할 필요 없이, DB만 수정하면 되므로 편리합니다.
+* JSON을 통해 데이터를 입력받아 테이블/차트로 표현할 수 있는 워드프레스 플러그인을 함께 활용합니다.
+* 해당 플러그인은 오직 URL로만 JSON 데이터를 받을 수 있습니다. 따라서 URL 파라미터로 제품명을 넘겨 값을 받도록 구성하였습니다.
+
+## [접근 방법]
+* 본 프로그램은 Docker 로 배포될 예정이며, 사전 구축해둔 도커 내부 네트워크에 소속됩니다.
+* 블로그가 구동되고 있는 도커 컨테이너와 같은 네트워크에 위치하며, 별도의 포트 개방은 없습니다.
+* 즉, 블로그 컨테이너에서만 본 프로그램에 접근 가능하며, 외부에서는 어떤 형태로든 접근이 불가합니다.
+* 블로그 컨테이너에서 본 프로그램으로의 접근은, 도커 사설망에 부여된 컨테이너 IP를 활용합니다.
+
+## [API 명세]
+* 벤치마크 점수를 불러올 제품명과 벤치마크 플랫폼을 쿼리스트링 형식으로 넘겨줍니다.
+* 각 제품명은 콤마(,)로 구분됩니다.
+* 벤치마크 데이터가 존재하지 않는 경우에는 JSON 에서 제외됩니다.
+#### /CPU?benchmark={Benchmark-Platform}&names={Product Name},{Product Name},...
+* CPU 벤치마크 점수를 요청합니다.
+
+#### /GPU?benchmark={Benchmark-Platform}&names={Product Name},{Product Name},...
+* GPU 벤치마크 점수를 요청합니다.
+
+#### Example
+
+
+## [벤치마크 플랫폼]
+DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습니다.
+#### CPU
+* Cinebench R23, Multi-Thread (Parameter: CineBenchR23MT)
+* Cinebench R23, Single-Thread (Parameter: CineBenchR23ST)
+
+#### GPU
+* 3DMark Time-Spy
+
+## [Dependencies]
+* Spring Web
+* Lombok
+* MariaDB Driver
+* Spring Boot JPA
+* Spring Boot DevTools
+* swagger
+
+---
+Latest Edited on 2024. 08. 01.<br>
+Created on 2024. 08. 01.
