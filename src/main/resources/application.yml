@@ -1,0 +1,38 @@
+server:
+  port: ${SB_PORT}
+  tomcat:
+    basedir: ./logs/tomcat_access_log
+    accesslog:
+      enabled: true
+      directory:
+
+spring:
+  datasource:
+    url: jdbc:mariadb://${DB_IP}:${DB_PORT}/${DB_NAME}
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      show-sql: true
+      format_sql: true
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+
+springdoc:
+  swagger-ui:
+    path: /swagger.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+    display-request-duration: true
+
+
+logging:
+  file:
+    path: ./logs/
+  level:
+    root: info
+    org.hibernate.orm.jdbc.bind: trace
