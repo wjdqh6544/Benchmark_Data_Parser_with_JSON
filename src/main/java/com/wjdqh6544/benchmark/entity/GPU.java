@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
-- entity/GPU: an entity class that connect with "GPU" table of Database
+- entity/GPU: an entity class that connects with "GPU" table of Database
 */
 @Entity
 @RequiredArgsConstructor

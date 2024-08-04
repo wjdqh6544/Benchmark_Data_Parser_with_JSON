@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
-- service/GPUService: a service class that process the raw data given by gpuRepository.
+- service/GPUService: a service class that processes the raw data given by gpuRepository.
 */
 @Service
-public class GPUService {
+public class GPUService extends absService {
 }

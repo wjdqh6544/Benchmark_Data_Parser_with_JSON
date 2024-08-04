@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
-- entity/CPU: an entity class that connect with "CPU" table of Database
+- entity/CPU: an entity class that connects with "CPU" table of Database
 */
 @Entity
 @Getter

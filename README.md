@@ -23,6 +23,7 @@
 ## [API 명세]
 * 벤치마크 점수를 불러올 제품명과 벤치마크 플랫폼을 쿼리스트링 형식으로 넘겨줍니다.
 * 각 제품명은 콤마(,)로 구분됩니다.
+* 벤치마크 플랫폼과 제품명은 대소문자를 구분하지 않습니다.
 * 벤치마크 데이터가 존재하지 않는 경우에는 JSON 에서 제외됩니다.
 #### /CPU?benchmark={Benchmark-Platform}&names={Product Name},{Product Name},...
 * CPU 벤치마크 점수를 요청합니다.
@@ -40,7 +41,7 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * Cinebench R23, Single-Thread (Parameter: CineBenchR23ST)
 
 #### GPU
-* 3DMark Time-Spy
+* 3DMark Time-Spy (Parameter: TimeSpy)
 
 ## [Dependencies]
 * Spring Web
