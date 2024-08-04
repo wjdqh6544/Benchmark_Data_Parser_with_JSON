@@ -19,7 +19,6 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @Service
 @RequiredArgsConstructor
 public class CPUService extends absService {
-
     private final CPURepository cpuRepository;
 
     public GetResultListVo getCPUBenchList(RequestDto requestDto){
@@ -29,16 +28,16 @@ public class CPUService extends absService {
             return NotFoundException.productListIsEmpty("CPU");
         }
         List<CPU> rawList = cpuRepository.findAll(Sort.by(Sort.Direction.ASC, "cpuName"));
-        Map<String, Integer> filterList = new HashMap<>();
+        Map<String, String[]> filterList = new HashMap<>();
         switch (requestDto.getBenchmark().toLowerCase()) {
             case "cinebenchr23mt" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getCpuName(), obj.getCinebenchR23MT());
+                    filterList.put(obj.getCpuName().replace(" ", "").toLowerCase(), new String[]{obj.getCpuName(), obj.getCinebenchR23MT().toString()});
                 }
             }
             case "cinebenchr23st" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getCpuName(), obj.getCinebenchR23ST());
+                    filterList.put(obj.getCpuName().replace(" ", "").toLowerCase(), new String[]{obj.getCpuName(), obj.getCinebenchR23ST().toString()});
                 }
             }
             default -> {

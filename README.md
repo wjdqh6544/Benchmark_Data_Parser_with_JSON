@@ -32,7 +32,12 @@
 * GPU 벤치마크 점수를 요청합니다.
 
 #### Example
-
+* DB에 저장된 벤치마크 점수가 제품명과 함께 반환된다.<br>점수가 존재하지 않으면, 다음과 같이 "404 Not found" 가 반환된다.<br>
+![image](https://github.com/user-attachments/assets/cdadb073-261f-4c06-8c48-9bae6364aa9d)
+* 벤치마크 플랫폼 이름을 기재하지 않거나 잘못 기재한 경우, 아래와 같이 "400 Bad Request" 가 반환된다.<br>
+![image](https://github.com/user-attachments/assets/e62bac97-6fd4-434e-af09-f96a964206a8)
+* 제품명을 기재하지 않은 경우, 아래와 같이 "400 Bad Request" 가 반환된다.<br>
+  ![image](https://github.com/user-attachments/assets/cb8e7cd1-46ee-4bba-94d5-76cdbd89464d)
 
 ## [벤치마크 플랫폼]
 DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습니다.
@@ -52,5 +57,8 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * swagger
 
 ---
-Latest Edited on 2024. 08. 01.<br>
+Latest Edited on 2024. 08. 04.<br>
+* Add Example Image
+* equality
+
 Created on 2024. 08. 01.

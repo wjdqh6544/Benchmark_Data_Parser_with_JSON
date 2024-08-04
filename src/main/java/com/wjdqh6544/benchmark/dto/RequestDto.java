@@ -1,7 +1,6 @@
 package com.wjdqh6544.benchmark.dto;
 
 import lombok.Getter;
-
 import java.beans.ConstructorProperties;
 import java.util.List;
 

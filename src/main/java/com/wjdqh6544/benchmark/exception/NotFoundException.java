@@ -12,9 +12,10 @@ BLOG_Benchmark_Data_Parser_with_JSON
 public class NotFoundException {
     private static GetEachResultVo eachResult;
     private static ArrayList<GetEachResultVo> resList;
+
     public static GetResultListVo productListIsEmpty(String productType){
         eachResult = GetEachResultVo.builder()
-                .productName("400 Bad Request. / List of requested" + productType + " is empty.")
+                .productName("400 Bad Request. / List of requested " + productType + " is empty.")
                 .score(-1)
                 .build();
         resList = new ArrayList<>(Arrays.asList(eachResult));
