@@ -19,6 +19,7 @@ bin/
 
 ### IntelliJ IDEA ###
 /src/test
+/work
 /logs
 .idea
 *.iws
