@@ -6,8 +6,6 @@ concurrency:
 
 # invoking condition
 on:
-  push: # when pushing to main branch.
-    branches: [ "main" ]
   pull_request: # when pull request is invoked, and it closed.
     branches: [ "main" ]
     types: closed
