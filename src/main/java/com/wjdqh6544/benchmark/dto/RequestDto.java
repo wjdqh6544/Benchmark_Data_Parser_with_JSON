@@ -13,7 +13,7 @@ public class RequestDto {
     private String benchmark;
     private List<String> productList;
 
-    @ConstructorProperties({"benchmark", "name"})
+    @ConstructorProperties({"benchmark", "productNames"})
     public RequestDto(String benchmark, List<String> productList){
         if (benchmark != null){
             this.benchmark = benchmark.replace(" ", "");

@@ -25,10 +25,10 @@
 * 각 제품명은 콤마(,)로 구분됩니다.
 * 벤치마크 플랫폼과 제품명은 대소문자와 공백을 구분하지 않습니다.
 * 벤치마크 데이터가 존재하지 않는 경우, 404 Not Found 와 함께 입력된 제품명이 반환됩니다.
-#### /CPU?benchmark={Benchmark-Platform}&names={Product Name},{Product Name},...
+#### /CPU?benchmark={Benchmark-Platform}&productNames={Product Name},{Product Name},...
 * CPU 벤치마크 점수를 요청합니다.
 
-#### /GPU?benchmark={Benchmark-Platform}&names={Product Name},{Product Name},...
+#### /GPU?benchmark={Benchmark-Platform}&productNames={Product Name},{Product Name},...
 * GPU 벤치마크 점수를 요청합니다.
 
 #### Example
@@ -59,6 +59,7 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 ---
 ### Latest Edited on 2024. 08. 06.<br>
 * Edit and add some sentences.
+* Edit Parameter Name (name -> productNames)
 
 1st Edit on 2024. 08. 04 
 * Add Example Image
