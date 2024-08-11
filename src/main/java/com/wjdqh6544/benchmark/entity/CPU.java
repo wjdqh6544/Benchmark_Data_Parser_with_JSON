@@ -15,12 +15,12 @@ public class CPU {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
-    private String cpuName;
+    @Column(name = "product_name", nullable = false, unique = true)
+    private String productName;
 
     @Column(name = "cinebench_r23_mt")
-    private Integer cinebenchR23MT;
+    private Integer Cinebench_R23_MT;
 
     @Column(name = "cinebench_r23_st")
-    private Integer cinebenchR23ST;
+    private Integer Cinebench_R23_ST;
 }

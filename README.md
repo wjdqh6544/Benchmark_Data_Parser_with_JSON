@@ -57,11 +57,15 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * swagger
 
 ---
-### Latest Edited on 2024. 08. 06.<br>
+### Latest Edited on 2024. 08. 11.<br>
+* Edit Database table name (Have a same name: cpu_name, gpu_name -> product_name)
+* Edit Variable name of entity
+
+2nd Edit on 2024. 08. 06.
 * Edit and add some sentences.
 * Edit Parameter Name (name -> productNames)
 
-1st Edit on 2024. 08. 04 
+1st Edit on 2024. 08. 04.
 * Add Example Image
 * Doesn't matter for blank and case in Parameter when checking the benchmark platform and product name in DB.
 

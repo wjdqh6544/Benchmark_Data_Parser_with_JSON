@@ -32,7 +32,7 @@ public class GPUService extends absService {
         switch (requestDto.getBenchmark().toLowerCase()) {
             case "timespy" -> {
                 for (GPU obj : rawList) {
-                    filterList.put(obj.getGpuName().replace(" ", "").toLowerCase(), new String[]{obj.getGpuName(), obj.getTimeSpy().toString()});
+                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.get_3DMark_Time_Spy().toString()});
                 }
             }
             default -> {

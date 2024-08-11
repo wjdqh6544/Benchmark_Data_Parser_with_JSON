@@ -32,12 +32,12 @@ public class CPUService extends absService {
         switch (requestDto.getBenchmark().toLowerCase()) {
             case "cinebenchr23mt" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getCpuName().replace(" ", "").toLowerCase(), new String[]{obj.getCpuName(), obj.getCinebenchR23MT().toString()});
+                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_MT().toString()});
                 }
             }
             case "cinebenchr23st" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getCpuName().replace(" ", "").toLowerCase(), new String[]{obj.getCpuName(), obj.getCinebenchR23ST().toString()});
+                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_ST().toString()});
                 }
             }
             default -> {
