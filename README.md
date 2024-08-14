@@ -3,8 +3,7 @@
 * DB에 저장된 CPU 및 GPU 의 벤치마크 점수를 반환하는 프로그램입니다.
 * JAVA SpringBoot 를 통해 작성되었으며, 데이터는 JSON 형식으로 파싱되어 제공됩니다.
 * URL을 통해 CPU/GPU 의 제품명을 제공하면, 각 제품의 이름과 벤치마크 점수가 JSON 형태로 반환됩니다.
-* 벤치마크 점수 추가/수정은 지원하지 않으며, 오직 DB로부터 파일을 읽어오는 기능만 제공됩니다.
-* SpringBoot 를 통한 데이터 수정/추가 계획은 없습니다.
+* Thymeleaf 를 활용하여 데이터를 수집 및 저장할 수 있습니다. (단, 데이터의 수정은 불가합니다.)
 * 개발 기간: 2024. 08. 01. ~ (필요 시 지속적으로 수정 및 보완 예정)
 ---
 ## [프로그램 작성 목적]
@@ -16,9 +15,11 @@
 
 ## [접근 방법]
 * 본 프로그램은 Docker 로 배포될 예정이며, 사전 구축해둔 도커 내부 네트워크에 소속됩니다.
-* 블로그가 구동되고 있는 도커 컨테이너와 같은 네트워크에 위치하며, 별도의 포트 개방은 없습니다.
-* 즉, 블로그 컨테이너에서만 본 프로그램에 접근 가능하며, 외부에서는 어떤 형태로든 접근이 불가합니다.
-* 블로그 컨테이너에서 본 프로그램으로의 접근은, 도커 사설망에 부여된 컨테이너 IP를 활용합니다.
+* 블로그가 구동되고 있는 도커 컨테이너와 같은 네트워크에 위치하며, 별도의 포트 개방은 없습니다.<br>
+  (즉, 블로그 컨테이너에서만 본 프로그램에 접근 가능하며, 외부에서는 어떤 형태로든 접근이 불가합니다.)
+* 블로그 컨테이너는 도커 사설망을 통해 본 프로그램으로 접근합니다.
+* 예외적으로, 데이터를 수집/저장하는 페이지는 VPN 사설망을 통해서만 접근할 수 있습니다.<br>
+  (VPN 망이 아닌 곳에서 접근을 시도하면, 본 프로그램을 사용하는 블로그로 강제 리다이렉트됩니다.)
 
 ## [API 명세]
 * 벤치마크 점수를 불러올 제품명과 벤치마크 플랫폼을 쿼리스트링 형식으로 넘겨줍니다.
@@ -31,13 +32,17 @@
 #### /GPU?benchmark={Benchmark-Platform}&productNames={Product Name},{Product Name},...
 * GPU 벤치마크 점수를 요청합니다.
 
-#### Example
-* DB에 저장된 벤치마크 점수가 제품명과 함께 반환된다.<br>점수가 존재하지 않으면, 다음과 같이 "404 Not found" 가 반환된다.<br>
+#### /insert
+* 벤치마크 데이터를 크롤링하여 DB에 저장하기 위한 페이지입니다.
+* VPN 사설망에서만 접근할 수 있습니다.
+
+### Example
+* DB에 저장된 벤치마크 점수가 제품명과 함께 반환됩니다.<br>점수가 존재하지 않으면, 다음과 같이 "404 Not found" 가 반환됩니다.<br>
 ![image](https://github.com/user-attachments/assets/cdadb073-261f-4c06-8c48-9bae6364aa9d)
-* 벤치마크 플랫폼 이름을 기재하지 않거나 잘못 기재한 경우, 아래와 같이 "400 Bad Request" 가 반환된다.<br>
+* 벤치마크 플랫폼 이름을 기재하지 않거나 잘못 기재한 경우, 아래와 같이 "400 Bad Request" 가 반환됩니다.<br>
 ![image](https://github.com/user-attachments/assets/e62bac97-6fd4-434e-af09-f96a964206a8)
-* 제품명을 기재하지 않은 경우, 아래와 같이 "400 Bad Request" 가 반환된다.<br>
-  ![image](https://github.com/user-attachments/assets/cb8e7cd1-46ee-4bba-94d5-76cdbd89464d)
+* 제품명을 기재하지 않은 경우, 아래와 같이 "400 Bad Request" 가 반환됩니다..<br>
+![image](https://github.com/user-attachments/assets/cb8e7cd1-46ee-4bba-94d5-76cdbd89464d)
 
 ## [벤치마크 플랫폼]
 DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습니다.
@@ -55,9 +60,17 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * Spring Data JPA
 * Spring Boot DevTools
 * swagger
+* thymeleaf
+* Gson
 
 ---
-### Latest Edited on 2024. 08. 11.<br>
+### Latest Edited on 2024. 08. 14.<br>
+* Add new feature - Data crawling and inserting page using thymeleaf.
+* Add Dependencies.
+* Add API Specification.
+* Edit and Add the explanation relative to this program.
+
+3rd Edit on 2024. 08. 11
 * Edit Database table name (Have a same name: cpu_name, gpu_name -> product_name)
 * Edit Variable name of entity
 

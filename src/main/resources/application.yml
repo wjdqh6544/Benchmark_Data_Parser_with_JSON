@@ -21,6 +21,13 @@ spring:
     properties:
       hibernate:
         show_sql: false
+  devtools:
+    restart:
+      enabled: true
+    thymeleaf:
+      cache: false
+    livereload:
+      enabled: true
 
 springdoc:
   swagger-ui:
