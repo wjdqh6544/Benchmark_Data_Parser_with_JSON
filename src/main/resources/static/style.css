@@ -1,3 +1,12 @@
+select {
+    box-sizing: border-box;
+    margin: 0 5px 0 5px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    width: 300px;
+    font-size: 16px;
+}
+
 .Page-title {
     font-size: 28px;
     display: flex;
@@ -24,11 +33,12 @@
     margin: 0 auto;
 }
 
-.URL-input-button {
+.URL-input-button, .data-score-listBtn {
     font-size: 18px;
     height: 2rem;
     width: 10vw;
     min-width: 100px;
+    white-space: nowrap;
 }
 
 .data-information-header {
@@ -47,7 +57,18 @@
 
 .data-information-title, .data-score-title {
     font-size: 24px;
-    margin-bottom: 0px;
+    margin-bottom: 1em;
+}
+
+.data-information-saveBtn, .data-score-listBtn {
+    margin-bottom: 1em;
+}
+
+.benchmark-information-sources {
+    margin: 0 5px 0 5px;
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+    font-size: 18px;
 }
 
 .data-information-count {
@@ -63,8 +84,22 @@
     margin-bottom: 1em;
 }
 
+.crawling-result-data {
+    display: flex;
+}
+
+.crawling-result-data-left {
+    width: 40vw;
+}
+
+.crawling-result-data-right {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+
 .data-score-table {
-    margin-top: 1em;
+    height: 50vh;
 }
 
 .data-information-table-thead-tr, .data-score-table-thead-tr {
@@ -79,19 +114,30 @@
     font-size: 18px;
 }
 
-.benchmark-information-input-box {
-    margin: 0 5px 0 5px;
-    padding: 5px 0px 5px 0px;
+.data-score-table-tbody-style {
+    width: 30vw;
+    height: 47vh;
+    overflow-y: auto;
+    white-space: nowrap;
     text-align: center;
-    min-width: 300px;
-    font-size: 16px;
 }
 
-select {
-    box-sizing: border-box;
-    margin: 0 5px 0 5px;
-    padding: 5px 10px 5px 10px;
-    border-radius: 6px;
-    width: 300px;
-    font-size: 16px;
+.data-score-listBtn {
+    margin: 1em 0 1em 0;
+    width: 20vw;
+    height: 2em;
+    text-align: center;
 }
+
+.crawling-result-total-product {
+    font-size: 18px;
+    margin: 0 0 1em 0;
+}
+
+.data-score-textArea {
+    font-size: 18px;
+    width: 50vw;
+    height: 30vh;
+    padding: 10px 5px 5px 10px;
+}
+

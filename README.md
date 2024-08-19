@@ -53,7 +53,7 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 #### GPU
 * 3DMark Time-Spy (Parameter: TimeSpy)
 
-## [Dependencies]
+## [SpringBoot Dependencies]
 * Spring Web
 * Lombok
 * MariaDB Driver
@@ -62,9 +62,21 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * swagger
 * thymeleaf
 * Gson
+* JSoup
 
 ---
-### Latest Edited on 2024. 08. 14.<br>
+### Latest Edited on 2024. 08. 19.<br>
+* Implement crawling: Enter URL and Click "Get crawl!" button, the crawled data will be shown below input URL box.
+* Support multiple benchmark result in one page.
+* Platform that support crawling is ONLY WccfTech.<br>
+(Other platform will be planned to add when needed.)
+* Edit html name (insert.html -> crawling.html, insert.js -> crawling.js)
+* Edit invoke URL (/insert -> /crawling)
+* Add dependency for jquery.
+* Change the content following the value of selection boxes.
+* Other small modifications.
+
+4th Edit on on 2024. 08. 14.<br>
 * Add new feature - Data crawling and inserting page using thymeleaf.
 * Add Dependencies.
 * Add API Specification.

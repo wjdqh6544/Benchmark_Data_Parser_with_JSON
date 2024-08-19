@@ -1,5 +1,6 @@
 package com.wjdqh6544.benchmark.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,16 +13,46 @@ BLOG_Benchmark_Data_Parser_with_JSON
 */
 @Getter @Setter
 public class CrawlerPageDto {
+    @JsonProperty("URL")
+    private String URL;
+    @JsonProperty("sources")
+    private String sources;
+    @JsonProperty("productType")
     private String productType;
+    @JsonProperty("benchmarkPlatform")
     private String benchmarkPlatform;
+    @JsonProperty("numOfBench")
     private Integer numOfBench;
-    private HashMap<String, List<String>> savedStatus; // Key - productType, List - Platform
+    @JsonProperty("crawledData")
+    private List<HashMap<String, Integer>> crawledData;
+    @JsonProperty("savedStatus")
+    private HashMap<String, List<String>> savedStatus; // in DB | Key - productType, List - Platform
+
+    public CrawlerPageDto() {
+        this.URL = null;
+        this.sources = null;
+        this.productType = null;
+        this.benchmarkPlatform = null;
+        this.numOfBench = null;
+        this.crawledData = null;
+        this.savedStatus = null;
+    }
 
     @Builder
-    public CrawlerPageDto(String productType, String benchmarkPlatform, Integer numOfBench, HashMap<String, List<String>> savedBenchmarkList){
+    public CrawlerPageDto(String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
+                          List<HashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus){
+        this.URL = URL;
+        this.sources = sources;
         this.productType = productType;
         this.benchmarkPlatform = benchmarkPlatform;
         this.numOfBench = numOfBench;
-        this.savedStatus = savedBenchmarkList;
+        this.crawledData = crawledData;
+        this.savedStatus = savedStatus;
+    }
+    @Override
+    public String toString() {
+        return "URL: " + this.getURL() + "\nsources: " + this.getSources() + "\nproductType: " + this.getProductType() +
+                "\nbenchmarkPlatform: " + this.getBenchmarkPlatform() + "\nnumOfBench: " + this.getNumOfBench() +
+                "\ncrawledData: " + this.getCrawledData() + "\nsavedStatus: " + this.getSavedStatus();
     }
 }
