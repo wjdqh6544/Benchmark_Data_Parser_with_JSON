@@ -20,7 +20,7 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @Controller
 @RequestMapping("/crawling")
 @RequiredArgsConstructor
-public class InsertController {
+public class CrawlingController {
     private final InsertService insertService;
 
     @GetMapping()
@@ -38,7 +38,6 @@ public class InsertController {
         try {
             Gson gsonObj = new GsonBuilder().serializeNulls().create();
             CrawlerPageDto resDto = insertService.getCrawledData(crawlerPageDto);
-            resDto.setSavedStatus(insertService.getSavedBenchmarkList());
             model.addAttribute("crawlerPageDto", resDto);
             model.addAttribute("crawlerPageDtoJSON", gsonObj.toJson(crawlerPageDto));
             return "crawling.html";

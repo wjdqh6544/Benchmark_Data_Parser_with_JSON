@@ -39,6 +39,7 @@
                         <div class="data-information-header">
                             <p class="data-information-title">[Benchmark Information]</p>
                             <button class="data-information-saveBtn"> Send to DB </button>
+                            <button class="data-information-copyURL" th:onclick="copyURL([[${crawlerPageDto.hostIP}]], [[${crawlerPageDto.port}]])"> Copy URL invoking API </button>
                         </div>
                         <div class="data-information-count">
                             <p style="margin-top:0px">- The number of benchmark: [[${crawlerPageDto.numOfBench}]]<br></p>
@@ -78,7 +79,7 @@
                             <div class="crawling-result-data-left">
                                 <p class="data-score-title">[Benchmark Data]</p>
                                 <div class="data-score-table-tbody-style">
-                                    <table class="data-score-table">
+                                    <table id="data-score-table" class="data-score-table">
                                         <thead class="data-score-table-thead">
                                         <tr class="data-score-table-thead-tr">
                                             <th class="data-score-table-thead-th">No</th>
@@ -91,10 +92,15 @@
                                 </div>
                             </div>
                             <div class="crawling-result-data-right">
-                                <button class="data-score-listBtn"> Get list of Products </button>
-                                <div id="crawling-result-total-product" class="crawling-result-total-product"></div>
-                                <label>
-                                    <textarea placeholder="This area will be filled with the list of products." class="data-score-textArea"></textarea>
+                                <button class="data-score-listBtn" onclick="getProductList()"> Get list of Products </button>
+                                <p id="crawling-result-total-product" class="crawling-result-total-product"></p>
+                                <label for="data-score-list-textArea" style="height:100%">
+                                    <textarea placeholder="This area will be filled with the list of products." id="data-score-list-textArea"
+                                              class="data-score-list-textArea" readonly></textarea>
+                                </label>
+                                <label for="data-score-URL-textArea" style="height:100%">
+                                    <textarea placeholder="This area will be filled with a URL of invoking API." id="data-score-URL-textArea"
+                                              class="data-score-URL-textArea" readonly></textarea>
                                 </label>
                             </div>
                         </section>

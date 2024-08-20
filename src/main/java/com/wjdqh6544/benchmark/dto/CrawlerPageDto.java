@@ -13,6 +13,10 @@ BLOG_Benchmark_Data_Parser_with_JSON
 */
 @Getter @Setter
 public class CrawlerPageDto {
+    @JsonProperty("hostIP")
+    private String hostIP;
+    @JsonProperty("port")
+    private String port;
     @JsonProperty("URL")
     private String URL;
     @JsonProperty("sources")
@@ -29,29 +33,34 @@ public class CrawlerPageDto {
     private HashMap<String, List<String>> savedStatus; // in DB | Key - productType, List - Platform
 
     public CrawlerPageDto() {
-        this.URL = null;
-        this.sources = null;
-        this.productType = null;
-        this.benchmarkPlatform = null;
-        this.numOfBench = null;
-        this.crawledData = null;
-        this.savedStatus = null;
+        this.setHostIP(null);
+        this.setPort(null);
+        this.setURL(null);
+        this.setSources(null);
+        this.setProductType(null);
+        this.setBenchmarkPlatform(null);
+        this.setNumOfBench(null);
+        this.setCrawledData(null);
+        this.setSavedStatus(null);
     }
 
     @Builder
-    public CrawlerPageDto(String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
+    public CrawlerPageDto(String hostIP, String port, String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
                           List<HashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus){
-        this.URL = URL;
-        this.sources = sources;
-        this.productType = productType;
-        this.benchmarkPlatform = benchmarkPlatform;
-        this.numOfBench = numOfBench;
-        this.crawledData = crawledData;
-        this.savedStatus = savedStatus;
+        this.setHostIP(hostIP);
+        this.setPort(port);
+        this.setURL(URL);
+        this.setSources(sources);
+        this.setProductType(productType);
+        this.setBenchmarkPlatform(benchmarkPlatform);
+        this.setNumOfBench(numOfBench);
+        this.setCrawledData(crawledData);
+        this.setSavedStatus(savedStatus);
     }
     @Override
     public String toString() {
-        return "URL: " + this.getURL() + "\nsources: " + this.getSources() + "\nproductType: " + this.getProductType() +
+        return "hostIP: " + this.getHostIP() + "\nPort: " + this.getPort() +
+                "\nURL: " + this.getURL() + "\nsources: " + this.getSources() + "\nproductType: " + this.getProductType() +
                 "\nbenchmarkPlatform: " + this.getBenchmarkPlatform() + "\nnumOfBench: " + this.getNumOfBench() +
                 "\ncrawledData: " + this.getCrawledData() + "\nsavedStatus: " + this.getSavedStatus();
     }

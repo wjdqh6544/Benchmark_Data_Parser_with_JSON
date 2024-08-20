@@ -1,3 +1,26 @@
+function copyURL(hostIP, port) {
+    var scoreList = document.getElementById("data-score-table").rows;
+    var productType = document.getElementById("productType").value;
+    var benchPlatform = document.getElementById("benchmarkPlatform").value;
+    var resURL = "http://" + hostIP + ":" + port + "/" + productType + "?benchmark=" + benchPlatform +
+                    "&productNames=";
+    for (i = 1; i < scoreList.length; i++) {
+        resURL += (scoreList[i].cells[1].innerHTML + ",").replace(/ /g, "");
+    }
+    document.getElementById("data-score-URL-textArea").value = resURL.slice(0, -1);
+    document.getElementById("data-score-URL-textArea").select();
+    document.execCommand("copy");
+}
+
+function getProductList() {
+    var scoreList = document.getElementById("data-score-table").rows;
+    var resStr = "";
+    for (i = 1; i < scoreList.length; i++) {
+        resStr += scoreList[i].cells[1].innerHTML + ", ";
+    }
+    document.getElementById("data-score-list-textArea").value = resStr.slice(0, -2);
+}
+
 function updateBenchmarkOrder() {
     var benchOrder = document.getElementById("benchmarkOrder").value;
     var benchScoreTbody = document.getElementById("data-score-table-tbody");
@@ -27,6 +50,10 @@ function updateBenchmarkOrder() {
             trElement.appendChild(tdNoElement);
             benchScoreTbody.appendChild(trElement);
     }
+    document.getElementById("productType").value = "NULL";
+    updateBenchmarkInfo();
+    document.getElementById("data-score-URL-textArea").value = "";
+    document.getElementById("data-score-URL-textArea").value = "";
 }
 
 function sendURL() {

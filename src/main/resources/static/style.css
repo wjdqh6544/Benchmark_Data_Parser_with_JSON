@@ -20,17 +20,16 @@ select {
 
 .URL-input-div {
     display: flex;
-    width: 100%;
+    width: 54vw;
     flex-wrap: nowrap;
     margin-bottom: 1em;
 }
 
 .URL-input-div .URL-input-box {
-    width: 82vw;
+    width: 85%;
     height: 2em;
-    margin-left: 1rem;
-    margin-right: 0.5rem;
     margin: 0 auto;
+    text-indent: 5px;
 }
 
 .URL-input-button, .data-score-listBtn {
@@ -45,7 +44,7 @@ select {
     display: flex;
 }
 
-.data-information-saveBtn {
+.data-information-saveBtn, .data-information-copyURL {
     margin: 0;
     margin-left: 50px;
     font-size: 18px;
@@ -53,6 +52,7 @@ select {
     width: 9rem;
     min-width: 140px;
     align-self: end;
+    white-space: nowrap;
 }
 
 .data-information-title, .data-score-title {
@@ -62,6 +62,11 @@ select {
 
 .data-information-saveBtn, .data-score-listBtn {
     margin-bottom: 1em;
+}
+
+.data-information-copyURL {
+    margin-bottom: 1em;
+    min-width: 240px;
 }
 
 .benchmark-information-sources {
@@ -89,17 +94,20 @@ select {
 }
 
 .crawling-result-data-left {
-    width: 40vw;
+    width: 21vw;
+    height: 53vh;
+    margin-right: 2em;
 }
 
 .crawling-result-data-right {
-    width: 60vw;
+    width: 31vw;
+    height: 53vh;
     display: flex;
     flex-direction: column;
 }
 
-.data-score-table {
-    height: 50vh;
+.data-score-table, .data-score-table-tbody-style {
+    height: 83%;
 }
 
 .data-information-table-thead-tr, .data-score-table-thead-tr {
@@ -115,8 +123,6 @@ select {
 }
 
 .data-score-table-tbody-style {
-    width: 30vw;
-    height: 47vh;
     overflow-y: auto;
     white-space: nowrap;
     text-align: center;
@@ -134,10 +140,26 @@ select {
     margin: 0 0 1em 0;
 }
 
-.data-score-textArea {
+.data-score-list-textArea, .data-score-URL-textArea {
     font-size: 18px;
-    width: 50vw;
-    height: 30vh;
     padding: 10px 5px 5px 10px;
+    width: 98%;
 }
 
+.data-score-list-textArea {
+    margin-bottom: 1em;
+    height: 85%
+}
+
+.data-score-URL-textArea {
+    height: 85%;
+}
+
+@media screen and (min-height: 1000px) {
+    .crawling-result-data-left {
+        height: 59vh;
+    }
+    .crawling-result-data-right {
+        height: 59vh;
+    }
+}

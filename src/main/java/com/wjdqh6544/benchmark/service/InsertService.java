@@ -5,8 +5,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.metamodel.Attribute;
 import jakarta.persistence.metamodel.EntityType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -21,9 +23,13 @@ BLOG_Benchmark_Data_Parser_with_JSON
 public class InsertService {
     private final EntityManagerFactory emf;
     private final CrawlingService crawlingService;
+    private final Environment environment;
 
     public CrawlerPageDto getCrawledData(CrawlerPageDto crawlerPageDto) throws IOException {
+        crawlerPageDto.setHostIP(InetAddress.getLocalHost().getHostAddress());
+        crawlerPageDto.setPort(environment.getProperty("local.server.port"));
         crawlerPageDto.setSources(crawlingService.getSources(crawlerPageDto.getURL()));
+        crawlerPageDto.setSavedStatus(getSavedBenchmarkList());
         crawlerPageDto.setCrawledData(crawlingService.selectSources(crawlerPageDto));
         if (crawlerPageDto.getCrawledData() == null){
             crawlerPageDto.setNumOfBench(-1);
@@ -33,7 +39,7 @@ public class InsertService {
         return crawlerPageDto;
     }
 
-    public HashMap<String, List<String>> getSavedBenchmarkList(){
+    private HashMap<String, List<String>> getSavedBenchmarkList(){
         Set<EntityType<?>> entitySet = emf.getMetamodel().getEntities();
         HashMap<String, List<String>> savedBenchmarkList = new HashMap<>();
         for (EntityType<?> entityType : entitySet) {

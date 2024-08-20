@@ -32,9 +32,11 @@
 #### /GPU?benchmark={Benchmark-Platform}&productNames={Product Name},{Product Name},...
 * GPU 벤치마크 점수를 요청합니다.
 
-#### /insert
+#### /crawling
 * 벤치마크 데이터를 크롤링하여 DB에 저장하기 위한 페이지입니다.
 * VPN 사설망에서만 접근할 수 있습니다.
+* 데이터 수집은 WccfTech 플랫폼만 지원하며, 타 플랫폼은 지원하지 않습니다.<br>
+  (필요한 경우 추가 예정)
 
 ### Example
 * DB에 저장된 벤치마크 점수가 제품명과 함께 반환됩니다.<br>점수가 존재하지 않으면, 다음과 같이 "404 Not found" 가 반환됩니다.<br>
@@ -64,19 +66,20 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * Gson
 * JSoup
 
----
-### Latest Edited on 2024. 08. 19.<br>
-* Implement crawling: Enter URL and Click "Get crawl!" button, the crawled data will be shown below input URL box.
-* Support multiple benchmark result in one page.
-* Platform that support crawling is ONLY WccfTech.<br>
-(Other platform will be planned to add when needed.)
-* Edit html name (insert.html -> crawling.html, insert.js -> crawling.js)
-* Edit invoke URL (/insert -> /crawling)
-* Add dependency for jquery.
-* Change the content following the value of selection boxes.
-* Other small modifications.
+## [Used external library for HTML]
+* JQuery
 
-4th Edit on on 2024. 08. 14.<br>
+---
+### Latest Edited on 2024. 08. 20.<br>
+* Add HTML library,
+* Small modification to README.md.
+
+5th Edit on 2024. 08. 19.<br>
+* Edit invoke URL (/insert -> /crawling)
+* Add HTML library, jquery.
+* Add SpringBoot Dependency, JSoup.
+
+4th Edit on 2024. 08. 14.<br>
 * Add new feature - Data crawling and inserting page using thymeleaf.
 * Add Dependencies.
 * Add API Specification.
