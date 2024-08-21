@@ -7,6 +7,10 @@ select {
     font-size: 16px;
 }
 
+textArea {
+    resize: horizontal;
+}
+
 .Page-title {
     font-size: 28px;
     display: flex;
@@ -99,7 +103,7 @@ select {
 }
 
 .crawling-result-data-left {
-    width: 21vw;
+    width: auto;
     height: 53vh;
     margin-right: 2em;
 }
@@ -128,6 +132,7 @@ select {
 }
 
 .data-score-table-tbody-style {
+    overflow-x: hidden;
     overflow-y: auto;
     white-space: nowrap;
     text-align: center;

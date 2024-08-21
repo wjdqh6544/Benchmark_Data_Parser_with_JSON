@@ -30,4 +30,24 @@ public class CPU {
         this.Cinebench_R23_MT = cinebench_R23_MT;
         this.Cinebench_R23_ST = cinebench_R23_ST;
     }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        if (otherObj == null){
+            return false;
+        } else if (!(otherObj instanceof CPU)) {
+            return false;
+        } else {
+            CPU otherCPUObj = (CPU) otherObj;
+            return (this.getProductName().equals(otherCPUObj.getProductName()) && this.getCinebench_R23_MT().equals(otherCPUObj.getCinebench_R23_MT()) &&
+                    this.getCinebench_R23_ST().equals(otherCPUObj.getCinebench_R23_ST()));
+        }
+    }
+
+    @Override
+    public String toString(){
+        return "productName: " + this.getProductName() +
+                "\nCineBench_R23_MT: " + this.getCinebench_R23_MT() +
+                "\nCineBench_R23_ST: " + this.getCinebench_R23_ST();
+    }
 }

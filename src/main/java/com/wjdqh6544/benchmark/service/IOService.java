@@ -25,8 +25,6 @@ public class IOService {
     private final EntityManagerFactory emf;
     private final CrawlingService crawlingService;
     private final Environment environment;
-    private CPU eachCPU;
-    private GPU eachGPU;
     private final CPURepository cpuRepository;
     private final GPURepository gpuRepository;
 
@@ -63,6 +61,7 @@ public class IOService {
 
     private boolean saveCPUData(String benchPlatform, int selectedBench, List<LinkedHashMap<String, Integer>> crawledData) {
         List<CPU> saveResList = new ArrayList<>();
+        CPU eachCPU;
         switch (benchPlatform) {
             case "Cinebench_R23_MT" -> {
                 LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
@@ -102,7 +101,7 @@ public class IOService {
             case "_3DMark_Time_Spy" -> {
                 LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
                 for (String productName : savedDataMap.keySet()){
-                    eachGPU = GPU.builder().productName(productName)._3DMark_Time_Spy(savedDataMap.get(productName)).build();
+                    GPU eachGPU = GPU.builder().productName(productName)._3DMark_Time_Spy(savedDataMap.get(productName)).build();
                     saveResList.add(eachGPU);
                 }
                 try {

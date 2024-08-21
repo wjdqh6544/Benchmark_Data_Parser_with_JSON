@@ -71,7 +71,6 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 
 ---
 ### Latest Edited on 2024. 08. 20.<br>
-* Add HTML library,
 * Small modification to README.md.
 
 5th Edit on 2024. 08. 19.<br>

@@ -8,38 +8,36 @@ function displaySavedSuccessfully() {
     }
 }
 
-// DB 저장 시 Type, Platform 초기화되지 않게 해야 함.
-// 표 width 확장 필요
-// DB 저장 시 Choose benchmark 초기화되지 않게 해야 함.
 // Score 반환 API 호출 시 500 에러 확인필요.
-
-function setSelectionTypeAndPlatform(Type, Platform) {
-    var productType = document.getElementById("productType");
-    var benchPlatform = document.getElementById("benchmarkPlatform");
-    productType.textContent = Type;
-    benchPlatform.textContent = Platform;
-}
 
 function saveToDB() {
     var inputProductType = document.getElementById("productType").value;
-    var inputBenchmarkPlatform = document.getElementById("benchmarkPlatform").value;
-    var inputSelectedBench = document.getElementById("benchmarkOrder").value;
-    var DTOdata = JSON.parse(htmlDecode(document.getElementById("enteredDTOJSON").textContent));
-    DTOdata.productType = inputProductType;
-    DTOdata.benchmarkPlatform = inputBenchmarkPlatform;
-    DTOdata.selectedBench = inputSelectedBench;
-    console.log(DTOdata.productType, DTOdata.benchmarkPlatform);
-    $.ajax({
-        type: "POST",
-        url: "/crawling/saveToDB",
-        contentType: "application/json",
-        data: JSON.stringify(DTOdata),
-        success: function(response) {
-            $(".main").html(response);
-//            updateBenchmarkOrder();
-            displaySavedSuccessfully();
-        }
-    });
+    if (inputProductType == "NULL"){
+        var html = document.getElementById("saving-result");
+        html.textContent = "Select Product Type and Benchmark Platform.";
+    } else {
+        var inputBenchmarkPlatform = document.getElementById("benchmarkPlatform").value;
+        var inputSelectedBench = document.getElementById("benchmarkOrder").value;
+        var DTOdata = JSON.parse(htmlDecode(document.getElementById("enteredDTOJSON").textContent));
+        DTOdata.productType = inputProductType;
+        DTOdata.benchmarkPlatform = inputBenchmarkPlatform;
+        DTOdata.selectedBench = inputSelectedBench;
+        $.ajax({
+            type: "POST",
+            url: "/crawling/saveToDB",
+            contentType: "application/json",
+            data: JSON.stringify(DTOdata),
+            success: function(response) {
+                $(".main").html(response);
+                document.getElementById("benchmarkOrder").value = inputSelectedBench;
+                updateBenchmarkOrder();
+                document.getElementById("productType").value = inputProductType;
+                updateBenchmarkInfo();
+                document.getElementById("benchmarkPlatform").value = inputBenchmarkPlatform;
+                displaySavedSuccessfully();
+            }
+        });
+    }
 }
 
 function copyURL(hostIP, port) {
