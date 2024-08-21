@@ -60,13 +60,18 @@ select {
     margin-bottom: 1em;
 }
 
-.data-information-saveBtn, .data-score-listBtn {
-    margin-bottom: 1em;
+.data-information-saveBtn {
+    margin-bottom: 1.3rem;
 }
 
 .data-information-copyURL {
-    margin-bottom: 1em;
+    margin-bottom: 1.3rem;
     min-width: 240px;
+}
+
+.saving-result {
+    font-size: 24px;
+    margin-left: 2em;
 }
 
 .benchmark-information-sources {
@@ -131,7 +136,7 @@ select {
 .data-score-listBtn {
     margin: 1em 0 1em 0;
     width: 20vw;
-    height: 2em;
+    height: 4em;
     text-align: center;
 }
 

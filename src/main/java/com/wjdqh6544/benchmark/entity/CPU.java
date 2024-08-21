@@ -1,8 +1,8 @@
 package com.wjdqh6544.benchmark.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
@@ -10,9 +10,9 @@ BLOG_Benchmark_Data_Parser_with_JSON
 */
 @Entity
 @Getter
-@RequiredArgsConstructor
 public class CPU {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "product_name", nullable = false, unique = true)
@@ -23,4 +23,11 @@ public class CPU {
 
     @Column(name = "cinebench_r23_st")
     private Integer Cinebench_R23_ST;
+
+    @Builder
+    public CPU(String productName, Integer cinebench_R23_MT, Integer cinebench_R23_ST) {
+        this.productName = productName;
+        this.Cinebench_R23_MT = cinebench_R23_MT;
+        this.Cinebench_R23_ST = cinebench_R23_ST;
+    }
 }

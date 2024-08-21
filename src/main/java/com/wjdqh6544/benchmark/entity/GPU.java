@@ -1,6 +1,7 @@
 package com.wjdqh6544.benchmark.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -20,4 +21,10 @@ public class GPU {
 
     @Column(name = "timespy")
     private Integer _3DMark_Time_Spy;
+
+    @Builder
+    public GPU(String productName, Integer _3DMark_Time_Spy) {
+        this.productName = productName;
+        this._3DMark_Time_Spy = _3DMark_Time_Spy;
+    }
 }

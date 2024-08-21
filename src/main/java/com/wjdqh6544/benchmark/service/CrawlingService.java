@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /*
@@ -21,7 +22,7 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @Service
 @RequiredArgsConstructor
 class CrawlingService {
-    public List<HashMap<String, Integer>> selectSources(CrawlerPageDto requestDto) {
+    public List<LinkedHashMap<String, Integer>> selectSources(CrawlerPageDto requestDto) {
         try {
             switch(requestDto.getSources()) {
                 case "wccftech.com" -> {
@@ -37,12 +38,12 @@ class CrawlingService {
 
     }
 
-    private List<HashMap<String, Integer>> crawlWccfTech(String enteredURL) throws IOException {
+    private List<LinkedHashMap<String, Integer>> crawlWccfTech(String enteredURL) throws IOException {
         Document pageHtml = Jsoup.connect(enteredURL).get();
         Elements elementList = pageHtml.select(".chart-data");
-        List<HashMap<String, Integer>> BenchmarkList = new ArrayList<>();
+        List<LinkedHashMap<String, Integer>> BenchmarkList = new ArrayList<>();
         for (Element element : elementList) {
-            HashMap<String, Integer> eachBench = new HashMap<>();
+            LinkedHashMap<String, Integer> eachBench = new LinkedHashMap<>();
             for (Element tmp : element.children()) {
                 eachBench.put(tmp.children().get(0).text(), Integer.parseInt(tmp.children().get(1).text()));
             }

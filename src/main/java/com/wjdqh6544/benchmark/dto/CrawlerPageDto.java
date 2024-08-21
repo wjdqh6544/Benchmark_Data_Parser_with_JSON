@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /*
@@ -27,10 +28,14 @@ public class CrawlerPageDto {
     private String benchmarkPlatform;
     @JsonProperty("numOfBench")
     private Integer numOfBench;
+    @JsonProperty("selectedBench")
+    private Integer selectedBench;
     @JsonProperty("crawledData")
-    private List<HashMap<String, Integer>> crawledData;
+    private List<LinkedHashMap<String, Integer>> crawledData;
     @JsonProperty("savedStatus")
     private HashMap<String, List<String>> savedStatus; // in DB | Key - productType, List - Platform
+    @JsonProperty("saveSuccessfully")
+    private boolean saveSuccessfully;
 
     public CrawlerPageDto() {
         this.setHostIP(null);
@@ -42,11 +47,12 @@ public class CrawlerPageDto {
         this.setNumOfBench(null);
         this.setCrawledData(null);
         this.setSavedStatus(null);
+        this.setSaveSuccessfully(false);
     }
 
     @Builder
     public CrawlerPageDto(String hostIP, String port, String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
-                          List<HashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus){
+                          List<LinkedHashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus, boolean status){
         this.setHostIP(hostIP);
         this.setPort(port);
         this.setURL(URL);
@@ -56,12 +62,13 @@ public class CrawlerPageDto {
         this.setNumOfBench(numOfBench);
         this.setCrawledData(crawledData);
         this.setSavedStatus(savedStatus);
+        this.setSaveSuccessfully(status);
     }
     @Override
     public String toString() {
-        return "hostIP: " + this.getHostIP() + "\nPort: " + this.getPort() +
+        return "hostIP: " + this.getHostIP() + "\nport: " + this.getPort() +
                 "\nURL: " + this.getURL() + "\nsources: " + this.getSources() + "\nproductType: " + this.getProductType() +
                 "\nbenchmarkPlatform: " + this.getBenchmarkPlatform() + "\nnumOfBench: " + this.getNumOfBench() +
-                "\ncrawledData: " + this.getCrawledData() + "\nsavedStatus: " + this.getSavedStatus();
+                "\ncrawledData: " + this.getCrawledData() + "\nsavedStatus: " + this.getSavedStatus() + "\nsavedSuccessfully: " + this.isSaveSuccessfully();
     }
 }

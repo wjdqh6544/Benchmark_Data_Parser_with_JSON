@@ -38,8 +38,9 @@
                     <div th:if="${crawlerPageDto.numOfBench} > 0">
                         <div class="data-information-header">
                             <p class="data-information-title">[Benchmark Information]</p>
-                            <button class="data-information-saveBtn"> Send to DB </button>
+                            <button class="data-information-saveBtn" onclick="saveToDB()"> Send to DB </button>
                             <button class="data-information-copyURL" th:onclick="copyURL([[${crawlerPageDto.hostIP}]], [[${crawlerPageDto.port}]])"> Copy URL invoking API </button>
+                            <p id="saving-result" class="saving-result"></p>
                         </div>
                         <div class="data-information-count">
                             <p style="margin-top:0px">- The number of benchmark: [[${crawlerPageDto.numOfBench}]]<br></p>

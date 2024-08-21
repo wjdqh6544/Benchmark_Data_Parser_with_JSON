@@ -30,12 +30,12 @@ public class CPUService extends absService {
         List<CPU> rawList = cpuRepository.findAll(Sort.by(Sort.Direction.ASC, "cpuName"));
         Map<String, String[]> filterList = new HashMap<>();
         switch (requestDto.getBenchmark().toLowerCase()) {
-            case "cinebenchr23mt" -> {
+            case "Cinebench_R23_MT" -> {
                 for (CPU obj : rawList) {
                     filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_MT().toString()});
                 }
             }
-            case "cinebenchr23st" -> {
+            case "Cinebench_R23_ST" -> {
                 for (CPU obj : rawList) {
                     filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_ST().toString()});
                 }

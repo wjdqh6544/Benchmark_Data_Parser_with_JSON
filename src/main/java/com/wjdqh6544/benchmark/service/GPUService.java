@@ -30,7 +30,7 @@ public class GPUService extends absService {
         List<GPU> rawList = gpuRepository.findAll(Sort.by(Sort.Direction.ASC, "gpuName"));
         Map<String, String[]> filterList = new HashMap<>();
         switch (requestDto.getBenchmark().toLowerCase()) {
-            case "timespy" -> {
+            case "_3DMark_Time_Spy" -> {
                 for (GPU obj : rawList) {
                     filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.get_3DMark_Time_Spy().toString()});
                 }

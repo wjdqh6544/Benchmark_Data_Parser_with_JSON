@@ -1,3 +1,47 @@
+function displaySavedSuccessfully() {
+    var status = JSON.parse(htmlDecode(document.getElementById("enteredDTOJSON").textContent)).saveSuccessfully;
+    var html = document.getElementById("saving-result");
+    if (status == true) {
+        html.textContent = "Saved Successfully.";
+    } else {
+        html.textContent = "Saved Failed.";
+    }
+}
+
+// DB 저장 시 Type, Platform 초기화되지 않게 해야 함.
+// 표 width 확장 필요
+// DB 저장 시 Choose benchmark 초기화되지 않게 해야 함.
+// Score 반환 API 호출 시 500 에러 확인필요.
+
+function setSelectionTypeAndPlatform(Type, Platform) {
+    var productType = document.getElementById("productType");
+    var benchPlatform = document.getElementById("benchmarkPlatform");
+    productType.textContent = Type;
+    benchPlatform.textContent = Platform;
+}
+
+function saveToDB() {
+    var inputProductType = document.getElementById("productType").value;
+    var inputBenchmarkPlatform = document.getElementById("benchmarkPlatform").value;
+    var inputSelectedBench = document.getElementById("benchmarkOrder").value;
+    var DTOdata = JSON.parse(htmlDecode(document.getElementById("enteredDTOJSON").textContent));
+    DTOdata.productType = inputProductType;
+    DTOdata.benchmarkPlatform = inputBenchmarkPlatform;
+    DTOdata.selectedBench = inputSelectedBench;
+    console.log(DTOdata.productType, DTOdata.benchmarkPlatform);
+    $.ajax({
+        type: "POST",
+        url: "/crawling/saveToDB",
+        contentType: "application/json",
+        data: JSON.stringify(DTOdata),
+        success: function(response) {
+            $(".main").html(response);
+//            updateBenchmarkOrder();
+            displaySavedSuccessfully();
+        }
+    });
+}
+
 function copyURL(hostIP, port) {
     var scoreList = document.getElementById("data-score-table").rows;
     var productType = document.getElementById("productType").value;
@@ -29,7 +73,6 @@ function updateBenchmarkOrder() {
     benchScoreTbody.innerHTML = "";
 
     if (benchmarkScoreData[benchOrder]) {
-        var totalProductNum = document.createElement("p");
         totalProduct.textContent = "The number of products: " + Object.keys(benchmarkScoreData[benchOrder]).length;
         Object.entries(benchmarkScoreData[benchOrder]).forEach(([productName, score], index) => {
             var trElement = document.createElement("tr");
@@ -54,6 +97,7 @@ function updateBenchmarkOrder() {
     updateBenchmarkInfo();
     document.getElementById("data-score-URL-textArea").value = "";
     document.getElementById("data-score-URL-textArea").value = "";
+    document.getElementById("saving-result").textContent = "";
 }
 
 function sendURL() {
@@ -82,7 +126,7 @@ function sendURL() {
         data: JSON.stringify(existingDTO),
         success: function(response) {
             $(".main").html(response);
-            updateBenchmarkOrder()
+            updateBenchmarkOrder();
         },
         error: function(xhr, status, error) {
             console.error("ERROR while getting benchmark information: ", status, error);
