@@ -8,8 +8,6 @@ function displaySavedSuccessfully() {
     }
 }
 
-// Score 반환 API 호출 시 500 에러 확인필요.
-
 function saveToDB() {
     var inputProductType = document.getElementById("productType").value;
     if (inputProductType == "NULL"){

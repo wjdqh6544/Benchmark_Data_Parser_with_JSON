@@ -3,7 +3,7 @@ package com.wjdqh6544.benchmark.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
@@ -11,6 +11,7 @@ BLOG_Benchmark_Data_Parser_with_JSON
 */
 @Entity
 @Getter
+@NoArgsConstructor
 public class GPU {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

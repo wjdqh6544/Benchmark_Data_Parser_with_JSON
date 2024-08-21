@@ -27,17 +27,23 @@ public class CPUService extends absService {
         } else if (requestDto.getProductList() == null || requestDto.getProductList().isEmpty()) {
             return NotFoundException.productListIsEmpty("CPU");
         }
-        List<CPU> rawList = cpuRepository.findAll(Sort.by(Sort.Direction.ASC, "cpuName"));
+        List<CPU> rawList = cpuRepository.findAll(Sort.by(Sort.Direction.ASC, "productName"));
         Map<String, String[]> filterList = new HashMap<>();
         switch (requestDto.getBenchmark().toLowerCase()) {
-            case "Cinebench_R23_MT" -> {
+            case "cinebench_r23_mt" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_MT().toString()});
+                    if (obj.getCinebench_R23_MT() != null){
+                        filterList.put(obj.getProductName().replace(" ", "").toLowerCase(),
+                                new String[]{obj.getProductName(), obj.getCinebench_R23_MT().toString()});
+                    }
                 }
-            }
-            case "Cinebench_R23_ST" -> {
+        }
+            case "cinebench_r23_st" -> {
                 for (CPU obj : rawList) {
-                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.getCinebench_R23_ST().toString()});
+                    if (obj.getCinebench_R23_ST() != null) {
+                        filterList.put(obj.getProductName().replace(" ", "").toLowerCase(),
+                                new String[]{obj.getProductName(), obj.getCinebench_R23_ST().toString()});
+                    }
                 }
             }
             default -> {

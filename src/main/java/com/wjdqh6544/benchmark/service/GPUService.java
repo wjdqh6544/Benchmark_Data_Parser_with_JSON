@@ -27,12 +27,15 @@ public class GPUService extends absService {
         } else if (requestDto.getProductList() == null || requestDto.getProductList().isEmpty()) {
             return NotFoundException.productListIsEmpty("GPU");
         }
-        List<GPU> rawList = gpuRepository.findAll(Sort.by(Sort.Direction.ASC, "gpuName"));
+        List<GPU> rawList = gpuRepository.findAll(Sort.by(Sort.Direction.ASC, "productName"));
         Map<String, String[]> filterList = new HashMap<>();
         switch (requestDto.getBenchmark().toLowerCase()) {
-            case "_3DMark_Time_Spy" -> {
+            case "_3dmark_time_spy" -> {
                 for (GPU obj : rawList) {
-                    filterList.put(obj.getProductName().replace(" ", "").toLowerCase(), new String[]{obj.getProductName(), obj.get_3DMark_Time_Spy().toString()});
+                    if(obj.get_3DMark_Time_Spy() != null){
+                        filterList.put(obj.getProductName().replace(" ", "").toLowerCase(),
+                                new String[]{obj.getProductName(), obj.get_3DMark_Time_Spy().toString()});
+                    }
                 }
             }
             default -> {

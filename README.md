@@ -49,11 +49,11 @@
 ## [벤치마크 플랫폼]
 DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습니다.
 #### CPU
-* Cinebench R23, Multi-Thread (Parameter: CineBenchR23MT)
-* Cinebench R23, Single-Thread (Parameter: CineBenchR23ST)
+* Cinebench R23, Multi-Thread (Parameter: Cinebench_R23_MT)
+* Cinebench R23, Single-Thread (Parameter: Cinebench_R23_ST)
 
 #### GPU
-* 3DMark Time-Spy (Parameter: TimeSpy)
+* 3DMark Time-Spy (Parameter: _3DMark_Time_Spy)
 
 ## [SpringBoot Dependencies]
 * Spring Web
@@ -70,7 +70,10 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * JQuery
 
 ---
-### Latest Edited on 2024. 08. 20.<br>
+### Latest Edited on 2024. 08. 21.<br>
+* Edit API Parameter. (Benchmark Platform)
+
+6th Edit on 2024. 08. 20.<br>
 * Small modification to README.md.
 
 5th Edit on 2024. 08. 19.<br>
