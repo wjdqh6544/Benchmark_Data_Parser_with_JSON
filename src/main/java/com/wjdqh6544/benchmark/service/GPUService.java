@@ -3,14 +3,15 @@ package com.wjdqh6544.benchmark.service;
 import com.wjdqh6544.benchmark.dto.RequestDto;
 import com.wjdqh6544.benchmark.entity.GPU;
 import com.wjdqh6544.benchmark.exception.NotFoundException;
+import com.wjdqh6544.benchmark.repository.CustomGPURepository;
+import com.wjdqh6544.benchmark.repository.CustomGPURepositoryImpl;
 import com.wjdqh6544.benchmark.repository.GPURepository;
 import com.wjdqh6544.benchmark.vo.GetResultListVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
@@ -20,6 +21,24 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @RequiredArgsConstructor
 public class GPUService extends absService {
     private final GPURepository gpuRepository;
+    private final CustomGPURepository customGPURepository;
+
+    boolean saveGPUData(String benchPlatform, int selectedBench, List<LinkedHashMap<String, Integer>> crawledData) {
+        List<GPU> saveResList = new ArrayList<>();
+        switch (benchPlatform) {
+            case "_3DMark_Time_Spy" -> {
+                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
+                for (String productName : savedDataMap.keySet()) {
+                    GPU eachGPU = GPU.builder().productName(productName)._3DMark_Time_Spy(savedDataMap.get(productName)).build();
+                    saveResList.add(eachGPU);
+                }
+            }
+            default -> {
+                return false;
+            }
+        }
+        return customGPURepository.saveAllWithEdit(saveResList);
+    }
 
     public GetResultListVo getGPUBenchList(RequestDto requestDto){
         if (requestDto.getBenchmark() == null || requestDto.getBenchmark().isEmpty()){

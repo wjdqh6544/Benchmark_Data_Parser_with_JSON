@@ -4,13 +4,12 @@ import com.wjdqh6544.benchmark.dto.RequestDto;
 import com.wjdqh6544.benchmark.entity.CPU;
 import com.wjdqh6544.benchmark.exception.NotFoundException;
 import com.wjdqh6544.benchmark.repository.CPURepository;
+import com.wjdqh6544.benchmark.repository.CustomCPURepository;
 import com.wjdqh6544.benchmark.vo.GetResultListVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
@@ -20,6 +19,32 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @RequiredArgsConstructor
 public class CPUService extends absService {
     private final CPURepository cpuRepository;
+    private final CustomCPURepository customCPURepository;
+
+    boolean saveCPUData(String benchPlatform, int selectedBench, List<LinkedHashMap<String, Integer>> crawledData) {
+        List<CPU> saveResList = new ArrayList<>();
+        CPU eachCPU;
+        switch (benchPlatform) {
+            case "Cinebench_R23_MT" -> {
+                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
+                for (String productName : savedDataMap.keySet()){
+                    eachCPU = CPU.builder().productName(productName).cinebench_R23_MT(savedDataMap.get(productName)).build();
+                    saveResList.add(eachCPU);
+                }
+            }
+            case "Cinebench_R23_ST" -> {
+                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
+                for (String productName : savedDataMap.keySet()){
+                    eachCPU = CPU.builder().productName(productName).cinebench_R23_ST(savedDataMap.get(productName)).build();
+                    saveResList.add(eachCPU);
+                }
+            }
+            default -> {
+                return false;
+            }
+        }
+        return customCPURepository.saveAllWithEdit(saveResList);
+    }
 
     public GetResultListVo getCPUBenchList(RequestDto requestDto){
         if (requestDto.getBenchmark() == null || requestDto.getBenchmark().isEmpty()){

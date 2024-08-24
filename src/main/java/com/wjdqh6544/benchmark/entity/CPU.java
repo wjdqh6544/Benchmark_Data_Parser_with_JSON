@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
 - entity/CPU: an entity class that connects with "CPU" table of Database
 */
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class CPU {
     @Id

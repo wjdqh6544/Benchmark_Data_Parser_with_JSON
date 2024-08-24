@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
 - entity/GPU: an entity class that connects with "GPU" table of Database
 */
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class GPU {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

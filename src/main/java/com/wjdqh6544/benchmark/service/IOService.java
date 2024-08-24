@@ -1,9 +1,6 @@
 package com.wjdqh6544.benchmark.service;
 
 import com.wjdqh6544.benchmark.dto.CrawlerPageDto;
-import com.wjdqh6544.benchmark.entity.*;
-import com.wjdqh6544.benchmark.repository.CPURepository;
-import com.wjdqh6544.benchmark.repository.GPURepository;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.metamodel.Attribute;
 import jakarta.persistence.metamodel.EntityType;
@@ -25,17 +22,17 @@ public class IOService {
     private final EntityManagerFactory emf;
     private final CrawlingService crawlingService;
     private final Environment environment;
-    private final CPURepository cpuRepository;
-    private final GPURepository gpuRepository;
+    private final CPUService cpuService;
+    private final GPUService gpuService;
 
     public CrawlerPageDto saveDataToDB(CrawlerPageDto crawlerPageDto) {
         switch (crawlerPageDto.getProductType()) {
             case "CPU" -> {
-                crawlerPageDto.setSaveSuccessfully(saveCPUData(crawlerPageDto.getBenchmarkPlatform(),
+                crawlerPageDto.setSaveSuccessfully(cpuService.saveCPUData(crawlerPageDto.getBenchmarkPlatform(),
                         crawlerPageDto.getSelectedBench(), crawlerPageDto.getCrawledData()));
             }
             case "GPU" -> {
-                crawlerPageDto.setSaveSuccessfully(saveGPUData(crawlerPageDto.getBenchmarkPlatform(),
+                crawlerPageDto.setSaveSuccessfully(gpuService.saveGPUData(crawlerPageDto.getBenchmarkPlatform(),
                         crawlerPageDto.getSelectedBench(), crawlerPageDto.getCrawledData()));
             }
             default -> {
@@ -57,64 +54,6 @@ public class IOService {
             crawlerPageDto.setNumOfBench(crawlerPageDto.getCrawledData().size());
         }
         return crawlerPageDto;
-    }
-
-    private boolean saveCPUData(String benchPlatform, int selectedBench, List<LinkedHashMap<String, Integer>> crawledData) {
-        List<CPU> saveResList = new ArrayList<>();
-        CPU eachCPU;
-        switch (benchPlatform) {
-            case "Cinebench_R23_MT" -> {
-                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
-                for (String productName : savedDataMap.keySet()){
-                    eachCPU = CPU.builder().productName(productName).cinebench_R23_MT(savedDataMap.get(productName)).build();
-                    saveResList.add(eachCPU);
-                }
-                try {
-                    cpuRepository.saveAll(saveResList);
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-            case "Cinebench_R23_ST" -> {
-                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
-                for (String productName : savedDataMap.keySet()){
-                    eachCPU = CPU.builder().productName(productName).cinebench_R23_ST(savedDataMap.get(productName)).build();
-                    saveResList.add(eachCPU);
-                }
-                try {
-                    cpuRepository.saveAll(saveResList);
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-            default -> {
-                return false;
-            }
-        }
-    }
-
-    private boolean saveGPUData(String benchPlatform, int selectedBench, List<LinkedHashMap<String, Integer>> crawledData) {
-        List<GPU> saveResList = new ArrayList<>();
-        switch (benchPlatform) {
-            case "_3DMark_Time_Spy" -> {
-                LinkedHashMap<String, Integer> savedDataMap = crawledData.get(selectedBench);
-                for (String productName : savedDataMap.keySet()){
-                    GPU eachGPU = GPU.builder().productName(productName)._3DMark_Time_Spy(savedDataMap.get(productName)).build();
-                    saveResList.add(eachGPU);
-                }
-                try {
-                    gpuRepository.saveAll(saveResList);
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-            default -> {
-                return false;
-            }
-        }
     }
 
     private HashMap<String, List<String>> getSavedBenchmarkList(){

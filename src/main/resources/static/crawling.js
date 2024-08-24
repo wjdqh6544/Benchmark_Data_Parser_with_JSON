@@ -4,7 +4,7 @@ function displaySavedSuccessfully() {
     if (status == true) {
         html.textContent = "Saved Successfully.";
     } else {
-        html.textContent = "Saved Failed.";
+        html.textContent = "Save Failed.";
     }
 }
 
@@ -91,7 +91,7 @@ function updateBenchmarkOrder() {
     }
     document.getElementById("productType").value = "NULL";
     updateBenchmarkInfo();
-    document.getElementById("data-score-URL-textArea").value = "";
+    document.getElementById("data-score-list-textArea").value = "";
     document.getElementById("data-score-URL-textArea").value = "";
     document.getElementById("saving-result").textContent = "";
 }
