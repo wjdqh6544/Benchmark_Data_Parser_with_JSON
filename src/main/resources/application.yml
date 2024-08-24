@@ -21,6 +21,13 @@ spring:
     properties:
       hibernate:
         show_sql: false
+  devtools:
+    restart:
+      enabled: true
+    thymeleaf:
+      cache: false
+    livereload:
+      enabled: true
 
 springdoc:
   swagger-ui:
@@ -34,5 +41,5 @@ logging:
   file:
     path: ./logs/
   level:
-    root: info
-    org.hibernate.orm.jdbc.bind: trace
+    root: INFO
+    org.hibernate.orm.jdbc.bind: INFO

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Benchmark Data Crawler</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+        <script src="/jquery-3.7.1.min.js"></script>
+        <script src="/crawling.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <script type="application/json" id="enteredDTOJSON" th:text="${crawlerPageDtoJSON}"></script>
+            <section class="URL-input-section">
+                <p class="Page-title">Benchmark Data Crawling Program</p>
+                <div class="URL-input-div">
+                    <label class="URL-input-label">
+                        Input URL:
+                        <input class="URL-input-box"
+                               placeholder=" Enter Page URL which you want to crawling"
+                               type="text"
+                               th:value="${crawlerPageDto.URL}"
+                        />
+                    </label>
+                    <button class="URL-input-button" onclick="sendURL()"> Get crawl! </button>
+                </div>
+            </section>
+            <hr>
+            <section class="data-information">
+                <div th:if="${crawlerPageDto.numOfBench} == null">
+                    <p style="font-size:24px;"><b>Please enter the URL and Click "Get crawl!" button. </b></p>
+                </div>
+                <div th:unless="${crawlerPageDto.numOfBench} == null">
+                    <div th:if="${crawlerPageDto.numOfBench} == -1">
+                        <p style="font-size:24px;"><b>Entered Site is not supported. </b></p>
+                    </div>
+                    <div th:if="${crawlerPageDto.numOfBench} == 0">
+                        <p style="font-size:24px;"><b>Benchmark does not exists. </b></p>
+                    </div>
+                    <div th:if="${crawlerPageDto.numOfBench} > 0">
+                        <div class="data-information-header">
+                            <p class="data-information-title">[Benchmark Information]</p>
+                            <button class="data-information-saveBtn" onclick="saveToDB()"> Send to DB </button>
+                            <button class="data-information-copyURL" th:onclick="copyURL([[${crawlerPageDto.hostIP}]], [[${crawlerPageDto.port}]])"> Copy URL invoking API </button>
+                            <p id="saving-result" class="saving-result"></p>
+                        </div>
+                        <div class="data-information-count">
+                            <p style="margin-top:0px">- The number of benchmark: [[${crawlerPageDto.numOfBench}]]<br></p>
+                            <label>- Choose Benchmark:
+                                <select class="data-information-benchmarkOrder" id="benchmarkOrder" name="benchmarkOrder" onchange="updateBenchmarkOrder()">
+                                    <option th:each="benchmarkOrder : ${#numbers.sequence(1, crawlerPageDto.numOfBench)}" th:value="${benchmarkOrder - 1}" th:text="${benchmarkOrder}"></option>
+                                </select>
+                            </label>
+                        </div>
+                        <table class="data-information-table">
+                            <thead class="data-information-table-thead">
+                            <tr class="data-information-table-thead-tr">
+                                <th class="data-information-table-thead-th">Sources</th>
+                                <th class="data-information-table-thead-th">Type</th>
+                                <th class="data-information-table-thead-th">Benchmark Platform</th>
+                            </tr>
+                            </thead>
+                            <tbody class="data-information-table-tbody">
+                            <tr class="data-information-table-tbody-tr">
+                                <td class="benchmark-information-sources"><label th:text="${crawlerPageDto.sources}"></label></td>
+                                <td><div class="data-information-selection-box">
+                                    <label><select id="productType" name="productType" onchange="updateBenchmarkInfo()">
+                                        <option value="NULL">===== Choose Product Type =====</option>
+                                        <option th:each="productType : ${crawlerPageDto.savedStatus.keySet()}" th:value="${productType}" th:text="${productType}"></option>
+                                    </select></label>
+                                </div></td>
+                                <td><div class="data-information-selection-box">
+                                    <label><select id="benchmarkPlatform" name="benchmarkPlatform">
+                                        <option value="NULL">== Choose Benchmark Platform ==</option>
+                                    </select></label>
+                                </div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <section class="crawling-result-data">
+                            <div class="crawling-result-data-left">
+                                <p class="data-score-title">[Benchmark Data]</p>
+                                <div class="data-score-table-tbody-style">
+                                    <table id="data-score-table" class="data-score-table">
+                                        <thead class="data-score-table-thead">
+                                        <tr class="data-score-table-thead-tr">
+                                            <th class="data-score-table-thead-th">No</th>
+                                            <th class="data-score-table-thead-th">Product Name</th>
+                                            <th class="data-score-table-thead-th">Score</th>
+                                        </tr></thead>
+                                        <tbody class="data-score-table-tbody" id="data-score-table-tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="crawling-result-data-right">
+                                <button class="data-score-listBtn" onclick="getProductList()"> Get list of Products </button>
+                                <p id="crawling-result-total-product" class="crawling-result-total-product"></p>
+                                <label for="data-score-list-textArea" style="height:100%">
+                                    <textarea placeholder="This area will be filled with the list of products." id="data-score-list-textArea"
+                                              class="data-score-list-textArea" readonly></textarea>
+                                </label>
+                                <label for="data-score-URL-textArea" style="height:100%">
+                                    <textarea placeholder="This area will be filled with a URL of invoking API." id="data-score-URL-textArea"
+                                              class="data-score-URL-textArea" readonly></textarea>
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+            </div>
+    </body>
+</html>

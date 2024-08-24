@@ -11,8 +11,8 @@ import java.util.Map;
 BLOG_Benchmark_Data_Parser_with_JSON
 - service/absService: an abstract service class that contains method(s) commonly used in many concrete classes.
 */
-public abstract class absService {
-    GetResultListVo getReturnVo(String productType, List<String> productList, Map<String, String[]> filterList){
+abstract class absService {
+    protected GetResultListVo getReturnVo(String productType, List<String> productList, Map<String, String[]> filterList){
         List<GetEachResultVo> finalList = new ArrayList<>();
         for (String productName : productList) {
             String findProductName = productName.toLowerCase().replace(" ", "");
