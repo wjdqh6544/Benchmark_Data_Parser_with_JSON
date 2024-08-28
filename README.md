@@ -76,8 +76,7 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * MariaDB Driver
 * Spring Data JPA
 * Spring Boot DevTools
-* swagger
-* thymeleaf
+* Thymeleaf
 * Gson
 * JSoup
 
@@ -85,7 +84,10 @@ DB에 저장되어 있는 CPU/GPU의 벤치마크 플랫폼은 다음과 같습�
 * JQuery
 
 ---
-### Latest Edited on 2024. 08. 24.<br>
+### Latest Edited on 2024. 08. 28.<br>
+* Remove a dependency "Swagger"
+
+8th Edit on 2024. 08. 24.<br>
 * Add the content relative to Crawling page.
 * Add and Edit existing content of program explanation.
 
