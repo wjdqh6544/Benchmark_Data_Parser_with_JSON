@@ -4,13 +4,11 @@ import com.wjdqh6544.benchmark.dto.RequestDto;
 import com.wjdqh6544.benchmark.entity.GPU;
 import com.wjdqh6544.benchmark.exception.NotFoundException;
 import com.wjdqh6544.benchmark.repository.CustomGPURepository;
-import com.wjdqh6544.benchmark.repository.CustomGPURepositoryImpl;
 import com.wjdqh6544.benchmark.repository.GPURepository;
 import com.wjdqh6544.benchmark.vo.GetResultListVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 /*
