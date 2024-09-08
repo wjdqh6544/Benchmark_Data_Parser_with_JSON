@@ -1,6 +1,6 @@
 package com.wjdqh6544.benchmark.service;
 
-import com.wjdqh6544.benchmark.dto.CrawlerPageDto;
+import com.wjdqh6544.benchmark.dto.BenchmarkPageDto;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,7 +21,7 @@ BLOG_Benchmark_Data_Parser_with_JSON
 @Service
 @RequiredArgsConstructor
 class CrawlingService {
-    public List<LinkedHashMap<String, Integer>> selectSources(CrawlerPageDto requestDto) {
+    public List<LinkedHashMap<String, Integer>> selectSources(BenchmarkPageDto requestDto) {
         try {
             switch(requestDto.getSources()) {
                 case "wccftech.com" -> {
@@ -42,11 +42,13 @@ class CrawlingService {
         Elements elementList = pageHtml.select(".chart-data");
         List<LinkedHashMap<String, Integer>> BenchmarkList = new ArrayList<>();
         for (Element element : elementList) {
-            LinkedHashMap<String, Integer> eachBench = new LinkedHashMap<>();
-            for (Element tmp : element.children()) {
-                eachBench.put(tmp.children().get(0).text(), Integer.parseInt(tmp.children().get(1).text()));
+            for (int idx = 0; idx < element.children().get(0).children().get(1).children().size(); idx++) {
+                LinkedHashMap<String, Integer> eachBench = new LinkedHashMap<>();
+                for (Element tmp : element.children()) {
+                    eachBench.put(tmp.children().get(0).text(), Integer.parseInt(tmp.children().get(1).children().get(idx).text()));
+                }
+                BenchmarkList.add(eachBench);
             }
-            BenchmarkList.add(eachBench);
         }
         return BenchmarkList;
     }

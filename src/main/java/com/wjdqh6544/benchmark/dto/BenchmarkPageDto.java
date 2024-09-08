@@ -13,7 +13,7 @@ BLOG_Benchmark_Data_Parser_with_JSON
 - dto/CrawlerPageDto: a DTO class that transfers Benchmark Information to Crawler Page (Thymeleaf).
 */
 @Getter @Setter
-public class CrawlerPageDto {
+public class BenchmarkPageDto {
     @JsonProperty("hostIP")
     private String hostIP;
     @JsonProperty("port")
@@ -37,7 +37,7 @@ public class CrawlerPageDto {
     @JsonProperty("saveSuccessfully")
     private boolean saveSuccessfully;
 
-    public CrawlerPageDto() {
+    public BenchmarkPageDto() {
         this.setHostIP(null);
         this.setPort(null);
         this.setURL(null);
@@ -51,8 +51,8 @@ public class CrawlerPageDto {
     }
 
     @Builder
-    public CrawlerPageDto(String hostIP, String port, String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
-                          List<LinkedHashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus, boolean status){
+    public BenchmarkPageDto(String hostIP, String port, String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
+                            List<LinkedHashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus, boolean status){
         this.setHostIP(hostIP);
         this.setPort(port);
         this.setURL(URL);
