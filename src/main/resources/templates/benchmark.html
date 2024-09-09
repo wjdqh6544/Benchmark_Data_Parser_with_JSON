@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Benchmark Data Crawler</title>
-        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/benchmark_style.css}" />
         <script src="/jquery-3.7.1.min.js"></script>
-        <script src="/crawling.js"></script>
+        <script src="/benchmark.js"></script>
     </head>
     <body>
         <div class="main">
-            <script type="application/json" id="enteredDTOJSON" th:text="${crawlerPageDtoJSON}"></script>
+            <script type="application/json" id="enteredDTOJSON" th:text="${benchmarkPageDtoJSON}"></script>
             <section class="URL-input-section">
                 <p class="Page-title">Benchmark Data Crawling Program</p>
                 <div class="URL-input-div">
@@ -17,7 +17,7 @@
                         <input class="URL-input-box"
                                placeholder=" Enter Page URL which you want to crawling"
                                type="text"
-                               th:value="${crawlerPageDto.URL}"
+                               th:value="${benchmarkPageDto.URL}"
                         />
                     </label>
                     <button class="URL-input-button" onclick="sendURL()"> Get crawl! </button>
@@ -25,28 +25,28 @@
             </section>
             <hr>
             <section class="data-information">
-                <div th:if="${crawlerPageDto.numOfBench} == null">
+                <div th:if="${benchmarkPageDto.numOfBench} == null">
                     <p style="font-size:24px;"><b>Please enter the URL and Click "Get crawl!" button. </b></p>
                 </div>
-                <div th:unless="${crawlerPageDto.numOfBench} == null">
-                    <div th:if="${crawlerPageDto.numOfBench} == -1">
+                <div th:unless="${benchmarkPageDto.numOfBench} == null">
+                    <div th:if="${benchmarkPageDto.numOfBench} == -1">
                         <p style="font-size:24px;"><b>Entered Site is not supported. </b></p>
                     </div>
-                    <div th:if="${crawlerPageDto.numOfBench} == 0">
+                    <div th:if="${benchmarkPageDto.numOfBench} == 0">
                         <p style="font-size:24px;"><b>Benchmark does not exists. </b></p>
                     </div>
-                    <div th:if="${crawlerPageDto.numOfBench} > 0">
+                    <div th:if="${benchmarkPageDto.numOfBench} > 0">
                         <div class="data-information-header">
                             <p class="data-information-title">[Benchmark Information]</p>
                             <button class="data-information-saveBtn" onclick="saveToDB()"> Send to DB </button>
-                            <button class="data-information-copyURL" th:onclick="copyURL([[${crawlerPageDto.hostIP}]], [[${crawlerPageDto.port}]])"> Copy URL invoking API </button>
+                            <button class="data-information-copyURL" th:onclick="copyURL([[${benchmarkPageDto.hostIP}]], [[${benchmarkPageDto.port}]])"> Copy URL invoking API </button>
                             <p id="saving-result" class="saving-result"></p>
                         </div>
                         <div class="data-information-count">
-                            <p style="margin-top:0px">- The number of benchmark: [[${crawlerPageDto.numOfBench}]]<br></p>
+                            <p style="margin-top:0px">- The number of benchmark: [[${benchmarkPageDto.numOfBench}]]<br></p>
                             <label>- Choose Benchmark:
                                 <select class="data-information-benchmarkOrder" id="benchmarkOrder" name="benchmarkOrder" onchange="updateBenchmarkOrder()">
-                                    <option th:each="benchmarkOrder : ${#numbers.sequence(1, crawlerPageDto.numOfBench)}" th:value="${benchmarkOrder - 1}" th:text="${benchmarkOrder}"></option>
+                                    <option th:each="benchmarkOrder : ${#numbers.sequence(1, benchmarkPageDto.numOfBench)}" th:value="${benchmarkOrder - 1}" th:text="${benchmarkOrder}"></option>
                                 </select>
                             </label>
                         </div>
@@ -60,11 +60,11 @@
                             </thead>
                             <tbody class="data-information-table-tbody">
                             <tr class="data-information-table-tbody-tr">
-                                <td class="benchmark-information-sources"><label th:text="${crawlerPageDto.sources}"></label></td>
+                                <td class="benchmark-information-sources"><label th:text="${benchmarkPageDto.sources}"></label></td>
                                 <td><div class="data-information-selection-box">
                                     <label><select id="productType" name="productType" onchange="updateBenchmarkInfo()">
                                         <option value="NULL">===== Choose Product Type =====</option>
-                                        <option th:each="productType : ${crawlerPageDto.savedStatus.keySet()}" th:value="${productType}" th:text="${productType}"></option>
+                                        <option th:each="productType : ${benchmarkPageDto.savedStatus.keySet()}" th:value="${productType}" th:text="${productType}"></option>
                                     </select></label>
                                 </div></td>
                                 <td><div class="data-information-selection-box">
