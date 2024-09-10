@@ -22,7 +22,7 @@ function saveToDB() {
         DTOdata.selectedBench = inputSelectedBench;
         $.ajax({
             type: "POST",
-            url: "/crawling/saveToDB",
+            url: "/benchmark/saveToDB",
             contentType: "application/json",
             data: JSON.stringify(DTOdata),
             success: function(response) {
@@ -117,7 +117,7 @@ function sendURL() {
 
     $.ajax({
         type: "POST",
-        url: "/crawling",
+        url: "/benchmark",
         contentType: "application/json",
         data: JSON.stringify(existingDTO),
         success: function(response) {
