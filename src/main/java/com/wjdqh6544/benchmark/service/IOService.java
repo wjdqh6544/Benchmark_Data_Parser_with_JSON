@@ -1,6 +1,6 @@
 package com.wjdqh6544.benchmark.service;
 
-import com.wjdqh6544.benchmark.dto.BenchmarkPageDto;
+import com.wjdqh6544.benchmark.dto.CrawlerPageDto;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.metamodel.Attribute;
 import jakarta.persistence.metamodel.EntityType;
@@ -25,35 +25,35 @@ public class IOService {
     private final CPUService cpuService;
     private final GPUService gpuService;
 
-    public BenchmarkPageDto saveDataToDB(BenchmarkPageDto benchmarkPageDto) {
-        switch (benchmarkPageDto.getProductType()) {
+    public CrawlerPageDto saveDataToDB(CrawlerPageDto crawlerPageDto) {
+        switch (crawlerPageDto.getProductType()) {
             case "CPU" -> {
-                benchmarkPageDto.setSaveSuccessfully(cpuService.saveCPUData(benchmarkPageDto.getBenchmarkPlatform(),
-                        benchmarkPageDto.getSelectedBench(), benchmarkPageDto.getCrawledData()));
+                crawlerPageDto.setSaveSuccessfully(cpuService.saveCPUData(crawlerPageDto.getBenchmarkPlatform(),
+                        crawlerPageDto.getSelectedBench(), crawlerPageDto.getCrawledData()));
             }
             case "GPU" -> {
-                benchmarkPageDto.setSaveSuccessfully(gpuService.saveGPUData(benchmarkPageDto.getBenchmarkPlatform(),
-                        benchmarkPageDto.getSelectedBench(), benchmarkPageDto.getCrawledData()));
+                crawlerPageDto.setSaveSuccessfully(gpuService.saveGPUData(crawlerPageDto.getBenchmarkPlatform(),
+                        crawlerPageDto.getSelectedBench(), crawlerPageDto.getCrawledData()));
             }
             default -> {
-                benchmarkPageDto.setSaveSuccessfully(false);
+                crawlerPageDto.setSaveSuccessfully(false);
             }
         }
-        return benchmarkPageDto;
+        return crawlerPageDto;
     }
 
-    public BenchmarkPageDto getCrawledData(BenchmarkPageDto benchmarkPageDto) throws IOException {
-        benchmarkPageDto.setHostIP(InetAddress.getLocalHost().getHostAddress());
-        benchmarkPageDto.setPort(environment.getProperty("local.server.port"));
-        benchmarkPageDto.setSources(crawlingService.getSources(benchmarkPageDto.getURL()));
-        benchmarkPageDto.setSavedStatus(getSavedBenchmarkList());
-        benchmarkPageDto.setCrawledData(crawlingService.selectSources(benchmarkPageDto));
-        if (benchmarkPageDto.getCrawledData() == null){
-            benchmarkPageDto.setNumOfBench(-1);
+    public CrawlerPageDto getCrawledData(CrawlerPageDto crawlerPageDto) throws IOException {
+        crawlerPageDto.setHostIP(InetAddress.getLocalHost().getHostAddress());
+        crawlerPageDto.setPort(environment.getProperty("local.server.port"));
+        crawlerPageDto.setSources(crawlingService.getSources(crawlerPageDto.getURL()));
+        crawlerPageDto.setSavedStatus(getSavedBenchmarkList());
+        crawlerPageDto.setCrawledData(crawlingService.selectSources(crawlerPageDto));
+        if (crawlerPageDto.getCrawledData() == null){
+            crawlerPageDto.setNumOfBench(-1);
         } else {
-            benchmarkPageDto.setNumOfBench(benchmarkPageDto.getCrawledData().size());
+            crawlerPageDto.setNumOfBench(crawlerPageDto.getCrawledData().size());
         }
-        return benchmarkPageDto;
+        return crawlerPageDto;
     }
 
     private HashMap<String, List<String>> getSavedBenchmarkList(){

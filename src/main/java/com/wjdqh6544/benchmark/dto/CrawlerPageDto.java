@@ -4,17 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 /*
 BLOG_Benchmark_Data_Parser_with_JSON
-- dto/SpecificationPageDto: a DTO class that transfers Benchmark Information to Crawler Page (Thymeleaf).
+- dto/CrawlerPageDto: a DTO class that transfers Benchmark Information to Crawler Page (Thymeleaf).
 */
 @Getter @Setter
-public class SpecificationPageDto {
+public class CrawlerPageDto {
     @JsonProperty("hostIP")
     private String hostIP;
     @JsonProperty("port")
@@ -25,10 +24,12 @@ public class SpecificationPageDto {
     private String sources;
     @JsonProperty("productType")
     private String productType;
-    @JsonProperty("numOfTable")
-    private Integer numOfTable;
-    @JsonProperty("selectedTable")
-    private Integer selectedTable;
+    @JsonProperty("benchmarkPlatform")
+    private String benchmarkPlatform;
+    @JsonProperty("numOfBench")
+    private Integer numOfBench;
+    @JsonProperty("selectedBench")
+    private Integer selectedBench;
     @JsonProperty("crawledData")
     private List<LinkedHashMap<String, Integer>> crawledData;
     @JsonProperty("savedStatus")
@@ -36,31 +37,38 @@ public class SpecificationPageDto {
     @JsonProperty("saveSuccessfully")
     private boolean saveSuccessfully;
 
-    public SpecificationPageDto(){
+    public CrawlerPageDto() {
         this.setHostIP(null);
         this.setPort(null);
         this.setURL(null);
         this.setSources(null);
         this.setProductType(null);
-        this.setNumOfTable(0);
-        this.setSelectedTable(0);
+        this.setBenchmarkPlatform(null);
+        this.setNumOfBench(null);
+        this.setCrawledData(null);
+        this.setSavedStatus(null);
+        this.setSaveSuccessfully(false);
     }
 
     @Builder
-    public SpecificationPageDto(String hostIP, String port, String URL, String sources, String productType, Integer numOfTable, Integer selectedTable) {
+    public CrawlerPageDto(String hostIP, String port, String URL, String sources, String productType, String benchmarkPlatform, Integer numOfBench,
+                          List<LinkedHashMap<String, Integer>> crawledData, HashMap<String, List<String>> savedStatus, boolean status){
         this.setHostIP(hostIP);
         this.setPort(port);
         this.setURL(URL);
         this.setSources(sources);
         this.setProductType(productType);
-        this.setNumOfTable(numOfTable);
-        this.setSelectedTable(selectedTable);
+        this.setBenchmarkPlatform(benchmarkPlatform);
+        this.setNumOfBench(numOfBench);
+        this.setCrawledData(crawledData);
+        this.setSavedStatus(savedStatus);
+        this.setSaveSuccessfully(status);
     }
-
     @Override
-    public String toString(){
+    public String toString() {
         return "hostIP: " + this.getHostIP() + "\nport: " + this.getPort() +
                 "\nURL: " + this.getURL() + "\nsources: " + this.getSources() + "\nproductType: " + this.getProductType() +
-                "\nnumOfTable: " + this.getNumOfTable() + "\nselectedTable: " + this.getSelectedTable();
+                "\nbenchmarkPlatform: " + this.getBenchmarkPlatform() + "\nnumOfBench: " + this.getNumOfBench() +
+                "\ncrawledData: " + this.getCrawledData() + "\nsavedStatus: " + this.getSavedStatus() + "\nsavedSuccessfully: " + this.isSaveSuccessfully();
     }
 }
